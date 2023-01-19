@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  kubectl-stg:
+    image: 'andersonpids/k9s:0.1'
+    volumes:
+      - ~/.kube/config:/aws/kubeconfig
+      - .:/app
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
+    working_dir: '/app'
+    entrypoint: ""
+  k9s-stg:
+    image: 'andersonpids/k9s:0.1'
+    volumes:
+      - ~/.kube/config:/aws/kubeconfig
+      - .:/app
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
+    working_dir: '/app'
