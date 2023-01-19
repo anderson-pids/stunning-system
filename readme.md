@@ -9,15 +9,9 @@ Tool to access EKS cluster with K9S and Kubectl.
 
 ---
 
-## Settings
-
-### Build
-> make build
-
 ### Set Variables
 
-1. Set `REGION` and `CLUSTER_NAME` variable into makefiles of staging and prod folders.
-2. Before execution, export credential as env. variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_SESSION_TOKEN`
+Before execution, export credential as env. variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`, `AWS_REGION` and `AWS_EKS_CLUSTER`(cluster name)
 
 ---
 
@@ -25,19 +19,25 @@ Tool to access EKS cluster with K9S and Kubectl.
 
 
 ### Kubectl
-1. Staging env
-    > make k-stg
-2. Prod env
-    > make k-prd
+    make k
 
 ### K9S
-1. Staging env
-    > make k9s-stg
-2. Prod env
-    > make k9s-prd
+    make k9s
+
 
 ---
 
+
+## Build your own image
+If you want to generate your own image, you can use Dockerfile, only need to set `IMAGE_NAME` variable in makefile.
+### Build
+
+    make build
+or
+
+    make build-no-cache
+
+---
 ## References
 
 K9S: 

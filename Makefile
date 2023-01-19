@@ -1,21 +1,28 @@
 VERSION=0.1
 IMAGE_NAME=andersonpids/k9s
 
-.PHONY: build build-no-cache k9s-stg k9s-prd k-stg k-prd
+.PHONY: build build-no-cache k k9s
 
 build:
 	@docker build -t $(IMAGE_NAME):${VERSION} .
 build-no-cache:
 	@docker build --no-cache -t $(IMAGE_NAME):${VERSION} .
 
-# Kubectl
-k-stg:
-	make -C staging kubectl
-k-prd:
-	make -C prod kubectl
+check-env:
+	@if [ -z $(AWS_REGION) ]; then echo "AWS_REGION is missing"; exit 2; fi
+	@if [ -z $(AWS_EKS_CLUSTER) ]; then echo "AWS_EKS_CLUSTER is missing"; exit 2; fi
+	@if [ -z $(AWS_ACCESS_KEY_ID) ]; then echo "AWS_ACCESS_KEY_ID is missing"; exit 2; fi
+	@if [ -z $(AWS_SECRET_ACCESS_KEY) ]; then echo "AWS_ACCESS_KEY_ID is missing"; exit 2; fi
+	@if [ -z $(AWS_SESSION_TOKEN) ]; then echo "AWS_ACCESS_KEY_ID is missing"; exit 2; fi
+	
+create-kubeconfig:
+	@aws eks update-kubeconfig --region $(REGION) --name $(CLUSTER_NAME)
 
-# K9S
-k9s-stg:
-	make -C staging k9s
-k9s-prd:
-	make -C prod k9s
+create-kubeconfig-dry-run:
+	@aws eks update-kubeconfig --region $(REGION) --name $(CLUSTER_NAME) --dry-run > kubeconfig
+
+k: check-env create-kubeconfig
+	@docker compose run -it --rm kubectl bash
+
+k9s: check-env create-kubeconfig
+	@docker compose run -it --rm k9s

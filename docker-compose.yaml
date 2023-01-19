@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  kubectl-stg:
+  kubectl:
     image: 'andersonpids/k9s:0.1'
     volumes:
       - ~/.kube/config:/aws/kubeconfig
@@ -11,7 +11,7 @@ services:
       - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
     working_dir: '/app'
     entrypoint: ""
-  k9s-stg:
+  k9s:
     image: 'andersonpids/k9s:0.1'
     volumes:
       - ~/.kube/config:/aws/kubeconfig
