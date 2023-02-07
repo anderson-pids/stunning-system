@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   kubectl:
-    image: 'andersonpids/k9s:0.1'
+    image: 'andersonpids/k9s:0.2'
     volumes:
       - ~/.kube/config:/aws/kubeconfig
       - .:/app
@@ -12,7 +12,7 @@ services:
     working_dir: '/app'
     entrypoint: ""
   k9s:
-    image: 'andersonpids/k9s:0.1'
+    image: 'andersonpids/k9s:0.2'
     volumes:
       - ~/.kube/config:/aws/kubeconfig
       - .:/app

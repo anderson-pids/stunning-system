@@ -1,4 +1,4 @@
-VERSION=0.1
+VERSION=0.2
 IMAGE_NAME=andersonpids/k9s
 
 REGION=$(AWS_REGION)

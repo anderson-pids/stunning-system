@@ -42,3 +42,5 @@ or
 
 K9S: 
 - https://github.com/derailed/k9s
+Kubectl aliases:
+- https://github.com/ahmetb/kubectl-aliases
